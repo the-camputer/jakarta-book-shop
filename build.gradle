@@ -1,15 +1,23 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 group 'org.camputer'
 version '1.0.0-SNAPSHOT'
+
+compileJava {
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compileOnly 'jakarta.platform:jakarta.jakartaee-web-api:9.1.0'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
