@@ -5,11 +5,15 @@ CREATE TABLE author (
                         CONSTRAINT pk_author PRIMARY KEY (author_id)
 );
 
+CREATE SEQUENCE seq_author_id minvalue 100;
+
 CREATE TABLE publisher (
                            publisher_id INT,
                            publisher_name VARCHAR(400),
                            CONSTRAINT pk_publisher PRIMARY KEY (publisher_id)
 );
+
+CREATE SEQUENCE seq_publisher_id minvalue 100;
 
 CREATE TABLE book (
                       book_id INT,
@@ -21,6 +25,8 @@ CREATE TABLE book (
                       CONSTRAINT pk_book PRIMARY KEY (book_id),
                       CONSTRAINT fk_book_pub FOREIGN KEY (publisher_id) REFERENCES publisher (publisher_id)
 );
+
+CREATE SEQUENCE seq_book_id minvalue 10;
 
 CREATE TABLE book_author (
                              book_id INT,
