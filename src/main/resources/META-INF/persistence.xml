@@ -6,14 +6,16 @@
     <persistence-unit name="BookshopRepository" transaction-type="JTA">
         <jta-data-source>java:comp/DefaultDataSource</jta-data-source>
         <properties>
+<!--            Leaving this as 'none' since the provided scripts are not running with multiple commands -->
             <property name="jakarta.persistence.schema-generation.database.action"
-                      value="drop-and-create"/>
-            <property name="jakarta.persistence.schema-generation.create-source"
-                      value="script"/>
-            <property name="jakarta.persistence.schema-generation.create-script-source"
-                      value="META-INF/sql/bookshop.sql" />
-            <property name="jakarta.persistence.sql-load-script-source"
-                      value="META-INF/sql/data.sql" />
+                      value="none"/>
+<!--            Leaving the script names here for educational purposes, but commenting as they are still being run on startup -->
+<!--            <property name="jakarta.persistence.schema-generation.create-source"-->
+<!--                      value="script"/>-->
+<!--            <property name="jakarta.persistence.schema-generation.create-script-source"-->
+<!--                      value="META-INF/sql/bookshop.sql" />-->
+<!--            <property name="jakarta.persistence.sql-load-script-source"-->
+<!--                      value="META-INF/sql/data.sql" />-->
 <!--            <property name="jakarta.persistence.schema-generation.drop-source"-->
 <!--                      value="script" />-->
 <!--            <property name="jakarta.persistence.schema-generation.drop-script-source"-->

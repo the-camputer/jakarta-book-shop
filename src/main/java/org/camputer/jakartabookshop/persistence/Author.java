@@ -10,9 +10,10 @@ import jakarta.persistence.Table;
 public class Author {
 
     @Id
+    @Column(name="author_id")
     private int authorId;
 
-    @Column
+    @Column(name="author_name")
     private String authorName;
 
     public int getAuthorId() {
