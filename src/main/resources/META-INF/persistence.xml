@@ -9,6 +9,7 @@
 <!--            Leaving this as 'none' since the provided scripts are not running with multiple commands -->
             <property name="jakarta.persistence.schema-generation.database.action"
                       value="none"/>
+            <property name="eclipselink.logging.level" value="FINE" />
 <!--            Leaving the script names here for educational purposes, but commenting as they are still being run on startup -->
 <!--            <property name="jakarta.persistence.schema-generation.create-source"-->
 <!--                      value="script"/>-->

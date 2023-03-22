@@ -1,7 +1,6 @@
-package org.camputer.jakartabookshop.web.resources;
+package org.camputer.jakartabookshop;
 
 import com.google.gson.Gson;
-import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -11,8 +10,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.camputer.jakartabookshop.business.AuthorService;
-import org.camputer.jakartabookshop.persistence.Author;
 
 import java.util.HashMap;
 
@@ -22,9 +19,6 @@ public class HealthCheckResource {
 
     private final Logger log = LogManager.getLogger(HealthCheckResource.class);
 
-    @Inject
-    private AuthorService authorService;
-
     @PersistenceContext
     private EntityManager em;
 
@@ -33,8 +27,7 @@ public class HealthCheckResource {
     public String getStatus() {
         HashMap<String, Object> results = new HashMap<>();
         try {
-            Author testAuthor = authorService.getAuthor(1);
-            results.put("dbConnection", testAuthor != null);
+            results.put("dbConnection", em.isOpen());
         } catch(Exception e) {
             e.printStackTrace();
             results.put("error", e.getMessage());
