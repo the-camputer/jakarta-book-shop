@@ -1,9 +1,11 @@
 package org.camputer.jakartabookshop.publisher;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.ws.rs.core.Link;
+import org.glassfish.jersey.linking.InjectLink;
+import org.glassfish.jersey.linking.InjectLinks;
+
+import java.util.List;
 
 @Entity
 @Table(name="publisher")
@@ -15,6 +17,13 @@ public class Publisher {
 
     @Column(name="publisher_name")
     private String publisherName;
+
+    @Transient
+    @InjectLinks({
+            @InjectLink( value = "/publisher/${instance.getPublisherId()}", rel = "self" ),
+            @InjectLink( value = "/publisher/${instance.getPublisherId()}/books", rel = "books")
+    })
+    public List<Link> links;
 
     public int getPublisherId() {
         return publisherId;
