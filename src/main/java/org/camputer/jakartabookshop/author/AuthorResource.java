@@ -34,4 +34,13 @@ public class AuthorResource {
         Author author = authorService.getAuthor(id);
         return Response.ok(author).build();
     }
+
+    @GET
+    @Path("/{id}/books")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBooksForAuthor(@PathParam("id") int id){
+        Author author = authorService.getAuthor(id);
+        List<Book> books = author.getBooks();
+        return Response.ok(books).build();
+    }
 }

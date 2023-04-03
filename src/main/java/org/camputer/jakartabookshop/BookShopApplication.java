@@ -11,6 +11,6 @@ public class BookShopApplication extends ResourceConfig {
 
     public BookShopApplication() {
         register(DeclarativeLinkingFeature.class);
-        packages("org.camputer.jakartabookshop.author");
+        packages("org.camputer.jakartabookshop.author", "org.camputer.jakartabookshop.book");
     }
 }

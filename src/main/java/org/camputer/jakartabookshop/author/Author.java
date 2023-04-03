@@ -31,6 +31,7 @@ public class Author {
     @Transient
     @InjectLinks({
             @InjectLink(value = "author/${instance.getAuthorId()}", rel = "self"),
+            @InjectLink(value = "author/${instance.getAuthorId()}/books", rel = "books")
     })
     public List<Link> links;
 
