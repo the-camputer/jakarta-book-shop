@@ -1,4 +1,4 @@
-package org.camputer.jakartabookshop;
+package org.camputer.jakartabookshop.api;
 
 import com.google.gson.Gson;
 import jakarta.persistence.EntityManager;

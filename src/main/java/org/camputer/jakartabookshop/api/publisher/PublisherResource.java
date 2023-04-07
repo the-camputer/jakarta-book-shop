@@ -1,4 +1,4 @@
-package org.camputer.jakartabookshop.publisher;
+package org.camputer.jakartabookshop.api.publisher;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -7,7 +7,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.camputer.jakartabookshop.book.Book;
+import org.camputer.jakartabookshop.api.book.Book;
 
 import java.util.List;
 

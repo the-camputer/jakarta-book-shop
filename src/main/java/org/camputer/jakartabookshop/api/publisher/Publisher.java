@@ -1,4 +1,4 @@
-package org.camputer.jakartabookshop.publisher;
+package org.camputer.jakartabookshop.api.publisher;
 
 import jakarta.persistence.*;
 import jakarta.ws.rs.core.Link;

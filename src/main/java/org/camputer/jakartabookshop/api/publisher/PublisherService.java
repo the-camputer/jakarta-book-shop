@@ -1,4 +1,4 @@
-package org.camputer.jakartabookshop.publisher;
+package org.camputer.jakartabookshop.api.publisher;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
@@ -10,8 +10,8 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.camputer.jakartabookshop.author.AuthorService;
-import org.camputer.jakartabookshop.book.Book;
+import org.camputer.jakartabookshop.api.author.AuthorService;
+import org.camputer.jakartabookshop.api.book.Book;
 
 import java.util.List;
 

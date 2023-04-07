@@ -1,10 +1,10 @@
-package org.camputer.jakartabookshop.book;
+package org.camputer.jakartabookshop.api.book;
 
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import jakarta.ws.rs.core.Link;
-import org.camputer.jakartabookshop.author.Author;
-import org.camputer.jakartabookshop.publisher.Publisher;
+import org.camputer.jakartabookshop.api.author.Author;
+import org.camputer.jakartabookshop.api.publisher.Publisher;
 import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLinks;
 
