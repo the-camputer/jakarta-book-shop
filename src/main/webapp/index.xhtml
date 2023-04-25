@@ -8,5 +8,8 @@
    <h:outputLabel value="Hello, world"/>
    <br />
    <h:outputLabel value="API Status is: #{healthCheck.getAPIStatus()}"/>
+   <h:form>
+      <h:commandButton action = "authors?faces-redirect=true" value = "Go to Authors" />
+   </h:form>
 </f:view>
 </html>

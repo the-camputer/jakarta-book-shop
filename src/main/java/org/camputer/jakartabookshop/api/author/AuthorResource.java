@@ -28,6 +28,14 @@ public class AuthorResource {
     UriInfo uriInfo;
 
     @GET
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllAuthors() {
+        List<Author> authors = authorService.getAllAuthors();
+        return Response.ok(authors).build();
+    }
+
+    @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAuthor(@PathParam("id") int id) {

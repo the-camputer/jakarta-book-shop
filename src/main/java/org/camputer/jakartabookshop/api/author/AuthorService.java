@@ -7,6 +7,8 @@ import jakarta.persistence.PersistenceUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 
 @ApplicationScoped
 public class AuthorService {
@@ -19,5 +21,10 @@ public class AuthorService {
     public Author getAuthor(int id) {
         EntityManager em = emf.createEntityManager();
         return em.find(Author.class, id);
+    }
+
+    public List<Author> getAllAuthors() {
+        EntityManager em = emf.createEntityManager();
+        return em.createNamedQuery("Author.getAllAuthors").getResultList();
     }
 }

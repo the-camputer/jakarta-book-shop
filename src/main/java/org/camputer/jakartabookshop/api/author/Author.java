@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name="AUTHOR")
+@NamedQuery(name="Author.getAllAuthors", query="select a from Author a")
 public class Author {
 
     @Id

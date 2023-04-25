@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+<f:view>
+    <h:outputLabel value="#{authorController.getAuthorData()}" />
+    <h:dataTable value="#{authorController.getAuthorData()}" var="author">
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{author.authorName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Books</f:facet>
+            #{authorController.getBooksLinkForAuthor(author.authorId)}
+        </h:column>
+    </h:dataTable>
+</f:view>
+</html>
