@@ -16,12 +16,14 @@ public class Author {
 
     @Id
     @Column(name="author_id")
-    private int authorId;
+    @GeneratedValue( strategy = GenerationType.AUTO, generator = "auth_generator")
+    @SequenceGenerator(name = "auth_generator", sequenceName = "seq_author_id")
+    private Integer authorId;
 
     @Column(name="author_name")
     private String authorName;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     @JoinTable(name="book_author",
                 joinColumns = { @JoinColumn(name="author_id") },
                 inverseJoinColumns = { @JoinColumn(name="book_id") }
@@ -31,17 +33,17 @@ public class Author {
 
     @Transient
     @InjectLinks({
-            @InjectLink(value = "author/${instance.getAuthorId()}", rel = "self"),
+            @InjectLink(value = "authors/${instance.getAuthorId()}", rel = "self"),
             @InjectLink(value = "author/${instance.getAuthorId()}/books", rel = "books")
     })
     public List<Link> links;
 
 
-    public int getAuthorId() {
+    public Integer getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
     }
 
@@ -60,4 +62,6 @@ public class Author {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
+
+    public void addBook(Book book) { this.books.add(book); }
 }

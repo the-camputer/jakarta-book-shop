@@ -32,7 +32,7 @@ public class AuthorController {
         var client = HttpClient.newHttpClient();
         var hostname = applicationProperties.getProperty("hostname");
         var protocol = applicationProperties.getProperty("protocol");
-        String url = String.format("%s://%s/bookshop/api/author/", protocol, hostname);
+        String url = String.format("%s://%s/bookshop/api/authors/", protocol, hostname);
         var request = HttpRequest.newBuilder(URI.create(url)).GET().build();
         try {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());

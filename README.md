@@ -29,3 +29,13 @@ The following infrastructure is required to build and deploy locally
   * initial database setup via scripts stored in `src/main/resources/META-INF/sql`
   * server.properties file stored in `<domain>/lib/classes/server.properties`
     * required props: `hostname` and `protocol` that enable access to API from JSF servlet
+
+## Results
+* The documentation from Jakarta is unapproachable when it comes to using it for quick reference
+* The community is severely lacking or relatively non-existent, with most Q/A results being ~10 years old
+* The requirement of Jakarta to maintain a high level of backward compatibility, coupled with the lack of current community, makes it extremely difficult to understand what's a current standard and what's outdated
+* There's nothing inherent to most Jakarta EE components/specs that proves to be of sufficient desirability that cannot be found in another ecosystem
+* JSF is just painfully frustrating to work with and there doesn't seem to be any documentation on the common tag libraries
+* Automatic Bean Discovery and the litany of easy-to-use tags in JAX-RS are really nice for quickly generating REST APIs
+
+**Conclusion**: The specifications are a great means of ensuring expected functionality baked into the language, but without a proper ecosystem like Spring to help manage it, as a well as an active community championing it, it's more effort than it's worth
