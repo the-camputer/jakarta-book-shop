@@ -1,6 +1,7 @@
 package org.camputer.jakartabookshop.api;
 
 import com.google.gson.Gson;
+import jakarta.annotation.security.PermitAll;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -14,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 
 @Path("/healthcheck")
+@PermitAll
 @Transactional
 public class HealthCheckResource {
 

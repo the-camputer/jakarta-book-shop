@@ -29,6 +29,8 @@ The following infrastructure is required to build and deploy locally
   * initial database setup via scripts stored in `src/main/resources/META-INF/sql`
   * server.properties file stored in `<domain>/lib/classes/server.properties`
     * required props: `hostname` and `protocol` that enable access to API from JSF servlet
+  * a `bookshop-realm` Realm setup in the domain's security for basic auth
+    * Example: Create a "bookshop-keyfile" in `domain1/config` and build a File-based Realm over top of it.
 
 ## Results
 * The documentation from Jakarta is unapproachable when it comes to using it for quick reference

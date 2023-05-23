@@ -1,6 +1,7 @@
 package org.camputer.jakartabookshop.api.author;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Path("/authors")
+@RolesAllowed("READ")
 public class AuthorResource {
 
     private final Logger log = LogManager.getLogger(AuthorResource.class);
@@ -48,6 +50,7 @@ public class AuthorResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("WRITE")
     public Response addAuthor(Author author) {
         Author result = authorService.persistAuthor(author);
         if (result == null) {
@@ -60,6 +63,7 @@ public class AuthorResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("WRITE")
     public Response updateAuthor(Author author) {
         if (author.getAuthorId() == null) {
             return Response
@@ -86,6 +90,7 @@ public class AuthorResource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("WRITE")
     public Response deleteAuthor(@PathParam("id") Integer id) {
         Author author = authorService.getAuthor(id);
         if (author == null) {
@@ -113,6 +118,7 @@ public class AuthorResource {
     @Path("/{id}/books")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("WRITE")
     public Response addBookForAuthor(@PathParam("id") Integer authorId, HashMap<String, Object> bookInfo) {
         Author author = authorService.getAuthor(authorId);
         if (author == null) {

@@ -1,5 +1,6 @@
 package org.camputer.jakartabookshop.api.book;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -13,6 +14,7 @@ import org.camputer.jakartabookshop.api.publisher.Publisher;
 import java.util.List;
 
 @Path("/book")
+@RolesAllowed("READ")
 public class BookResource {
 
     @Inject
