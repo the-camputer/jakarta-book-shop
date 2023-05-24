@@ -15,12 +15,10 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 @ApplicationPath("/api")
 @Provider
 public class BookShopApplication extends ResourceConfig {
-
     public BookShopApplication() {
         register(RolesAllowedDynamicFeature.class);
         register(DeclarativeLinkingFeature.class);
         packages(
-                "org.camputer.jakartabookshop",
                 "org.camputer.jakartabookshop.api",
                 "org.camputer.jakartabookshop.api.author",
                 "org.camputer.jakartabookshop.api.book",

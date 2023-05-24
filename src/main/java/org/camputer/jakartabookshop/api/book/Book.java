@@ -17,7 +17,7 @@ public class Book {
 
     @Id
     @Column(name="book_id")
-    private int bookId;
+    private Integer bookId;
 
     @Column(name="title")
     private String title;
@@ -52,11 +52,11 @@ public class Book {
     })
     public List<Link> links;
 
-    public int getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
