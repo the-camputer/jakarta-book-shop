@@ -2,6 +2,7 @@ package org.camputer.jakartabookshop.api.author;
 
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.core.Link;
 import org.camputer.jakartabookshop.api.book.Book;
 import org.glassfish.jersey.linking.InjectLink;
@@ -18,6 +19,7 @@ public class Author {
     @Column(name="author_id")
     @GeneratedValue( strategy = GenerationType.AUTO, generator = "auth_generator")
     @SequenceGenerator(name = "auth_generator", sequenceName = "seq_author_id")
+    @NotNull
     private Integer authorId;
 
     @Column(name="author_name")
@@ -64,4 +66,6 @@ public class Author {
     }
 
     public void addBook(Book book) { this.books.add(book); }
+
+    public void removeBook(Book book) { this.books.remove(book); }
 }

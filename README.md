@@ -35,9 +35,11 @@ The following infrastructure is required to build and deploy locally
 ## Results
 * The documentation from Jakarta is unapproachable when it comes to using it for quick reference
 * The community is severely lacking or relatively non-existent, with most Q/A results being ~10 years old
+* Heavy reliance on monolithic servers and complicated configurations of those servers necessitates a high degree of infrastructure knowledge to even begin making an application work
 * The requirement of Jakarta to maintain a high level of backward compatibility, coupled with the lack of current community, makes it extremely difficult to understand what's a current standard and what's outdated
 * There's nothing inherent to most Jakarta EE components/specs that proves to be of sufficient desirability that cannot be found in another ecosystem
 * JSF is just painfully frustrating to work with and there doesn't seem to be any documentation on the common tag libraries
+* Components and features feel like bolted-on afterthoughts instead of a working towards a cohesive whole
 * Automatic Bean Discovery and the litany of easy-to-use tags in JAX-RS are really nice for quickly generating REST APIs
 
-**Conclusion**: The specifications are a great means of ensuring expected functionality baked into the language, but without a proper ecosystem like Spring to help manage it, as a well as an active community championing it, it's more effort than it's worth
+**Conclusion**: The specifications are a great means of ensuring expected functionality that are baked into the language, but without a proper ecosystem like Spring to help manage it, as a well as an active community championing it, it's more effort than it's worth

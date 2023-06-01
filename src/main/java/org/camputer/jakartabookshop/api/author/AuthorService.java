@@ -4,7 +4,7 @@ import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.UserTransaction;
+import jakarta.transaction.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.camputer.jakartabookshop.api.book.Book;
@@ -85,6 +85,23 @@ public class AuthorService {
             utx.commit();
         } catch(Exception e) {
             log.error("Unable to associate book to author: " + author.getAuthorId());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean removeBookForAuthor(Author author, Book book) {
+        try {
+            utx.begin();
+            author = entityManager.merge(author);
+            book = entityManager.merge(book);
+            author.removeBook(book);
+            entityManager.merge(author);
+            utx.commit();
+        } catch (HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
+                 SystemException e) {
+            log.error("Unable to remove book association to author: " + author.getAuthorId());
             e.printStackTrace();
             return false;
         }

@@ -2,6 +2,7 @@ package org.camputer.jakartabookshop.api.book;
 
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.core.Link;
 import org.camputer.jakartabookshop.api.author.Author;
 import org.camputer.jakartabookshop.api.publisher.Publisher;
@@ -12,11 +13,15 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name="book")
+@Table(name="BOOK")
+@NamedQuery(name="Book.getAllBooks", query="select b from Book b")
 public class Book {
 
     @Id
     @Column(name="book_id")
+    @GeneratedValue( strategy = GenerationType.AUTO, generator = "book_generator")
+    @SequenceGenerator(name = "book_generator", sequenceName = "seq_book_id", allocationSize = 1)
+    @NotNull
     private Integer bookId;
 
     @Column(name="title")
@@ -26,7 +31,7 @@ public class Book {
     private String isbn13;
 
     @Column(name="num_pages")
-    private int numPages;
+    private Integer numPages;
 
     @Column(name="publication_date")
     private Date publicationDate;
@@ -76,11 +81,11 @@ public class Book {
         this.isbn13 = isbn13;
     }
 
-    public int getNumPages() {
+    public Integer getNumPages() {
         return numPages;
     }
 
-    public void setNumPages(int numPages) {
+    public void setNumPages(Integer numPages) {
         this.numPages = numPages;
     }
 

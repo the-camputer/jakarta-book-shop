@@ -7,6 +7,9 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.camputer.jakartabookshop.api.publisher.Publisher;
+
+import java.util.List;
 
 @ApplicationScoped
 public class BookService {
@@ -18,6 +21,10 @@ public class BookService {
     UserTransaction utx;
 
     private static final Logger log = LogManager.getLogger(BookService.class);
+
+    public List<Book> getAllBooks() {
+        return entityManager.createNamedQuery("Book.getAllBooks").getResultList();
+    }
 
     public Book getBook(int id) {
         return entityManager.find(Book.class, id);
@@ -54,6 +61,7 @@ public class BookService {
     public boolean removeBook(Book book) {
         try {
             utx.begin();
+            book = entityManager.merge(book);
             entityManager.remove(book);
             utx.commit();
         } catch (HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
@@ -63,5 +71,36 @@ public class BookService {
             return false;
         }
         return true;
+    }
+
+    public boolean addPublisherForBook(Book book, Publisher publisher) {
+        try {
+            utx.begin();
+            entityManager.refresh(book);
+            entityManager.refresh(publisher);
+            book.setPublisher(publisher);
+            entityManager.merge(book);
+            utx.commit();
+        } catch (HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
+                 SystemException e) {
+            log.error("Unable to associate publisher to book: " + book.getBookId());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean removePublisherForBook(Book book) {
+        try {
+            utx.begin();
+            entityManager.refresh(book);
+            book.setPublisher(null);
+            utx.commit();
+        } catch (HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
+                 SystemException e) {
+            log.error("Unable to remove publisher from book: " + book.getBookId());
+            e.printStackTrace();
+            return false;
+        } return true;
     }
 }

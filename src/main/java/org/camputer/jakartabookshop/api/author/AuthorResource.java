@@ -3,6 +3,8 @@ package org.camputer.jakartabookshop.api.author;
 
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -13,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 import org.camputer.jakartabookshop.api.book.Book;
 import org.camputer.jakartabookshop.api.book.BookService;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,25 +65,16 @@ public class AuthorResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("WRITE")
-    public Response updateAuthor(Author author) {
-        if (author.getAuthorId() == null) {
-            return Response
-                    .status(Response.Status.BAD_REQUEST)
-                    .entity(new HashMap<String, String>() {{
-                        put("error", "no author id in request payload");
-                    }})
-                    .build();
+    public Response updateAuthor(@Valid Author author) {
+        Author currentAuthor = authorService.getAuthor(author.getAuthorId());
+        if (currentAuthor == null) {
+            return authorNotFound(author.getAuthorId());
         } else {
-            Author currentAuthor = authorService.getAuthor(author.getAuthorId());
-            if (currentAuthor == null) {
-                return authorNotFound(author.getAuthorId());
+            Author result = authorService.mergeAuthor(author);
+            if (result == null) {
+                return Response.serverError().build();
             } else {
-                Author result = authorService.mergeAuthor(author);
-                if (result == null) {
-                    return Response.serverError().build();
-                } else {
-                    return Response.ok(result).build();
-                }
+                return Response.ok(result).build();
             }
         }
     }
@@ -116,15 +108,14 @@ public class AuthorResource {
 
     @PUT
     @Path("/{id}/books")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("WRITE")
-    public Response addBookForAuthor(@PathParam("id") Integer authorId, HashMap<String, Object> bookInfo) {
+    public Response addBookForAuthor(@PathParam("id") Integer authorId, @NotNull(message = "Book id must not be null") @FormParam("bookId") Integer bookId) {
         Author author = authorService.getAuthor(authorId);
         if (author == null) {
             return authorNotFound(authorId);
         } else {
-            int bookId = ((BigDecimal) bookInfo.get("id")).intValue();
             Book book = bookService.getBook(bookId);
             if (book == null) {
                 return Response
@@ -134,6 +125,34 @@ public class AuthorResource {
                         }}).build();
             } else {
                 boolean result = authorService.addBookForAuthor(author, book);
+                if (!result) {
+                    return Response.serverError().build();
+                } else {
+                    return Response.ok(author).build();
+                }
+            }
+        }
+    }
+
+    @DELETE
+    @Path("/{id}/books")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("WRITE")
+    public Response removeBookForAuthor(@PathParam("id") int authorId, @NotNull(message = "Book id must not be null") @FormParam("bookId") Integer bookId) {
+        Author author = authorService.getAuthor(authorId);
+        if (author == null) {
+            return authorNotFound(authorId);
+        } else {
+            Book book = bookService.getBook(bookId);
+            if (book == null) {
+                return Response
+                        .status(Response.Status.BAD_REQUEST)
+                        .entity(new HashMap<String, String>() {{
+                            put("error", "No book found for id " + bookId);
+                        }}).build();
+            } else {
+                boolean result = authorService.removeBookForAuthor(author, book);
                 if (!result) {
                     return Response.serverError().build();
                 } else {
