@@ -10,17 +10,6 @@
             <property name="jakarta.persistence.schema-generation.database.action"
                       value="none"/>
             <property name="eclipselink.logging.level" value="FINE" />
-<!--            Leaving the script names here for educational purposes, but commenting as they are still being run on startup -->
-<!--            <property name="jakarta.persistence.schema-generation.create-source"-->
-<!--                      value="script"/>-->
-<!--            <property name="jakarta.persistence.schema-generation.create-script-source"-->
-<!--                      value="META-INF/sql/bookshop.sql" />-->
-<!--            <property name="jakarta.persistence.sql-load-script-source"-->
-<!--                      value="META-INF/sql/data.sql" />-->
-<!--            <property name="jakarta.persistence.schema-generation.drop-source"-->
-<!--                      value="script" />-->
-<!--            <property name="jakarta.persistence.schema-generation.drop-script-source"-->
-<!--                      value="META-INF/sql/drop.sql" />-->
         </properties>
     </persistence-unit>
 </persistence>

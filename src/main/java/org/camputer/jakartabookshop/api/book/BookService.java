@@ -22,6 +22,13 @@ public class BookService {
 
     private static final Logger log = LogManager.getLogger(BookService.class);
 
+    public BookService() {}
+
+    public BookService(EntityManager entityManager, UserTransaction utx) {
+        this.entityManager = entityManager;
+        this.utx = utx;
+    }
+
     public List<Book> getAllBooks() {
         return entityManager.createNamedQuery("Book.getAllBooks").getResultList();
     }

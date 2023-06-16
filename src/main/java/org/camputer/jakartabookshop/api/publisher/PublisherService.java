@@ -27,6 +27,13 @@ public class PublisherService {
 
     private static final Logger log = LogManager.getLogger(AuthorService.class);
 
+    public PublisherService() {}
+
+    public PublisherService(EntityManager entityManager, UserTransaction utx) {
+        this.entityManager = entityManager;
+        this.utx = utx;
+    }
+
     public List<Publisher> getAllPublishers() {
         return entityManager.createNamedQuery("Publisher.getAllPublishers").getResultList();
     }

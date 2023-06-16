@@ -23,6 +23,13 @@ public class AuthorService {
 
     private static final Logger log = LogManager.getLogger(AuthorService.class);
 
+    public AuthorService() {};
+
+    public AuthorService(EntityManager em, UserTransaction utx) {
+        this.entityManager = em;
+        this.utx = utx;
+    }
+
     public Author getAuthor(Integer id) {
 //        EntityManager em = emf.createEntityManager();
         return entityManager.find(Author.class, id);
@@ -39,7 +46,8 @@ public class AuthorService {
             utx.begin();
             entityManager.persist(author);
             utx.commit();
-        } catch(Exception e) {
+        } catch(HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
+                SystemException e) {
             log.error("Unable to persist new author: " + author.toString());
             e.printStackTrace();
             return null;
@@ -52,7 +60,8 @@ public class AuthorService {
             utx.begin();
             entityManager.merge(author);
             utx.commit();
-        } catch(Exception e) {
+        } catch(HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
+                SystemException e) {
             log.error("Unable to merge author changes: " + author.toString());
             return null;
         }
@@ -67,7 +76,8 @@ public class AuthorService {
             }
             entityManager.remove(author);
             utx.commit();
-        } catch(Exception e) {
+        } catch(HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
+                SystemException e) {
             log.error("Unable to remove author: " + author.getAuthorId());
             e.printStackTrace();
             return false;
@@ -83,7 +93,8 @@ public class AuthorService {
             author.addBook(book);
             entityManager.merge(author);
             utx.commit();
-        } catch(Exception e) {
+        } catch(HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
+                SystemException e) {
             log.error("Unable to associate book to author: " + author.getAuthorId());
             e.printStackTrace();
             return false;
@@ -94,8 +105,8 @@ public class AuthorService {
     public boolean removeBookForAuthor(Author author, Book book) {
         try {
             utx.begin();
-            author = entityManager.merge(author);
-            book = entityManager.merge(book);
+            entityManager.refresh(author);
+            entityManager.refresh(book);
             author.removeBook(book);
             entityManager.merge(author);
             utx.commit();

@@ -40,6 +40,7 @@ The following infrastructure is required to build and deploy locally
 * There's nothing inherent to most Jakarta EE components/specs that proves to be of sufficient desirability that cannot be found in another ecosystem
 * JSF is just painfully frustrating to work with and there doesn't seem to be any documentation on the common tag libraries
 * Components and features feel like bolted-on afterthoughts instead of a working towards a cohesive whole
+* Testing, even with Mockito providing some dependency injection, is convoluted, prone to esoteric errors, and requires a litany of additional dependencies that are not immediately obvious
 * Automatic Bean Discovery and the litany of easy-to-use tags in JAX-RS are really nice for quickly generating REST APIs
 
-**Conclusion**: The specifications are a great means of ensuring expected functionality that are baked into the language, but without a proper ecosystem like Spring to help manage it, as a well as an active community championing it, it's more effort than it's worth
+**Conclusion**: The specifications are a great means of ensuring expected functionality that are baked into the language, but without a proper ecosystem like Spring to help manage it, as a well as an active community championing it, it's more effort than it's worth.

@@ -109,7 +109,7 @@ public class Book {
         return authors;
     }
 
-    public void setBooks(List<Author> authors) {
+    public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
 }

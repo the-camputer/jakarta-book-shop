@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'war'
+    id 'jacoco'
 }
 
 group 'org.camputer'
@@ -29,10 +30,34 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
     implementation 'org.eclipse.persistence:eclipselink:4.0.0'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testImplementation 'jakarta.platform:jakarta.jakartaee-web-api:9.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'org.mockito:mockito-core:5.3.1'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
+    testImplementation 'org.glassfish.jersey.test-framework:jersey-test-framework-core:3.0.9'
+    testImplementation 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-inmemory:3.0.9'
+    testImplementation 'com.h2database:h2:2.1.214'
+    testImplementation 'org.hibernate:hibernate-core-jakarta:5.6.15.Final'
+
+
+}
+
+jacocoTestReport {
+//    dependsOn test
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "org/camputer/jakartabookshop/api/BookShopApplication.class",
+                    "org/camputer/jakartabookshop/api/HealthCheckResource.class",
+                    "org/camputer/jakartabookshop/client/*"
+            ])
+        }))
+    }
 }
 
 test {
+    finalizedBy jacocoTestReport
     useJUnitPlatform()
 }
