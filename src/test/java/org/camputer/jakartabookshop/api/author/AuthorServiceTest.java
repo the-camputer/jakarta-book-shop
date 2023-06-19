@@ -49,7 +49,7 @@ public class AuthorServiceTest extends JPATest {
     }
 
     @Test
-    public void persistAuthor_creates_new_author_entity() {
+    public void persistAuthor_creates_new_author_and_returns_data() {
         Author SylvianNeuvel = new Author();
         SylvianNeuvel.setAuthorName("Sylvian Neuvel");
 

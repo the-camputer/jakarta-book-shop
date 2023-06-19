@@ -6,10 +6,8 @@ import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.camputer.jakartabookshop.api.book.Book;
@@ -29,9 +27,6 @@ public class AuthorResource {
 
     @Inject
     BookService bookService;
-
-    @Context
-    UriInfo uriInfo;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

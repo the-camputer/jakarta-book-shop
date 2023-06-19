@@ -36,10 +36,13 @@ public class Author {
     @Transient
     @InjectLinks({
             @InjectLink(value = "authors/${instance.getAuthorId()}", rel = "self"),
-            @InjectLink(value = "author/${instance.getAuthorId()}/books", rel = "books")
+            @InjectLink(value = "authors/${instance.getAuthorId()}/books", rel = "books")
     })
     public List<Link> links;
 
+    public Author() {}
+
+    public Author(int id) { this.authorId = id; }
 
     public Integer getAuthorId() {
         return authorId;
